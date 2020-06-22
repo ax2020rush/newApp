@@ -1,32 +1,80 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
-    <router-view/>
+    <transition :name="this.$store.state.AnimationType">
+      <router-view />
+    </transition>
   </div>
 </template>
+<script>
+export default {
+  watch: {
+    $route (to, from) {
+      // 如果to索引大于from索引,判断为前进状态,反之则为后退状态
+      if (to.meta.index > from.meta.index) {
+        // 设置动画名称
+        this.$store.dispatch('setTransition', 'turn-on')
+      } else {
+        this.$store.dispatch('setTransition', 'turn-off')
+      }
+    }
+  }
+}
+</script>
 
 <style lang="scss">
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Helvetica, Segoe UI, Arial, Roboto, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft Yahei', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
 }
+*{
+  padding: 0;
+  margin: 0;
+}
+.turn-on-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
 
-#nav {
-  padding: 30px;
+.turn-on-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+}
+body{
+  overflow-x: hidden;
 
-  a {
-    font-weight: bold;
-    color: #2c3e50;
+}
+.turn-on-enter-active,
+.turn-on-leave-active {
+  transition: all 500ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;right: 0;
+}
 
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
+.turn-off-enter {
+  opacity: 0;
+  transform: translate3d(100%, 0, 0);
+}
+
+.turn-off-leave-to {
+  opacity: 0;
+  transform: translate3d(0, 0, 0);
+}
+
+.turn-off-enter-active,
+.turn-off-leave-active {
+  transition: all 500ms;
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;right: 0;
+}
+
+.turn-off-leave-active {
+  z-index: 9999;
 }
 </style>

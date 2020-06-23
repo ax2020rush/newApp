@@ -32,6 +32,18 @@
                 </swiper>
               </van-sticky>
             </li>
+            <li>
+              <div class="line"></div>
+              <van-sticky :offset-top="116">
+                <div class="title">
+                  <h2>每日推荐</h2>
+                  <div class="lx2">
+                    更多
+                  </div>
+                </div>
+                </van-sticky>
+
+            </li>
           </ul>
         </van-tab>
         <van-tab title="发现">内容 3</van-tab>
@@ -137,6 +149,13 @@ export default {
 
       .card {
         li {
+          .line{
+            width: 96%;
+            height: 6px;
+            background: linear-gradient( to right,#f32ec9,#e62188,#ea562d);
+            margin: 40px 0;
+            margin-left: 4%;
+          }
           .title {
             display: flex;
             justify-content: space-between;
@@ -149,14 +168,20 @@ export default {
 
             .lx {
               color: #ec2195;
-              font-size: 13px;
+              font-size: 14px;
               display: flex;
               justify-content: center;
               align-items: center;
+              font-weight: 500;
 
               .van-icon {
                 transform: rotate(180deg);
               }
+            }
+            .lx2{
+              font-size: 14px;
+              color: #484848;
+              font-weight: 500;
             }
           }
 
@@ -172,7 +197,7 @@ export default {
           }
 
           .swiper-slide {
-            height: 300px;
+            height: 250px;
             border-radius: 8px;
             box-shadow: 4px 0px 10px rgba(35, 77, 111, 0.2);
             h3{

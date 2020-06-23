@@ -12,19 +12,25 @@
           <ul class="card">
             <li>
               <van-sticky :offset-top="116">
-              <div class="title">
-                <h2>音乐风格</h2>
-                <div class="lx">
-                  <van-icon name="play"/>
-                  类型
+                <div class="title">
+                  <h2>音乐风格</h2>
+                  <div class="lx">
+                    <van-icon name="play"/>
+                    类型
+                  </div>
                 </div>
-              </div>
-                <swiper :options="swiperOption">
-                  <swiper-slide>I'm Slide 1</swiper-slide>
-                  <swiper-slide>I'm Slide 2</swiper-slide>
-                  <swiper-slide>I'm Slide 3</swiper-slide>
+                <swiper :options="swiperOption" >
+                   <swiper-slide v-for="(val,key) in musicList" :key="key" :style="val.back">
+                     <h3>{{val.name}}</h3>
+                     <div class="text">
+                       <p>{{val.title}}</p>
+                       <p>{{val.text}}</p>
+                     </div>
+                     <div class="before" :style="val.back"></div>
+                   </swiper-slide>
+
                 </swiper>
-                </van-sticky>
+              </van-sticky>
             </li>
           </ul>
         </van-tab>
@@ -45,7 +51,6 @@ export default {
       swiperOption: {
         // 参数选项,显示小点
         // 循环
-
         // 每张播放时长3秒，自动播放
         autoplay: 2000,
         // 滑动速度
@@ -53,7 +58,18 @@ export default {
         slidesPerView: 3,
         spaceBetween: 20
         // delay:1000
-      }
+      },
+      musicList: [
+        { name: '轻音乐', back: 'background:linear-gradient(40deg,#4b67f6,#1ab8ee,#22dfd4)', title: '我的喜好', text: '2994万人听过' },
+        { name: '爵士音乐', back: 'background:linear-gradient(40deg,#813AD1,#B436A4,#ef2677)', title: '官方推荐', text: '2294万人听过' },
+        { name: '流行音乐', back: 'background:linear-gradient(40deg,#b52a91,#ea3565,#fd993b)', title: '我的喜好', text: '2994万人听过' },
+        { name: '摇滚音乐', back: 'background:linear-gradient(40deg,#4c7ce6,#9e63bd,#de6092)', title: '今日热门', text: '2494万人听过' },
+        { name: '钢琴乐', back: 'background:linear-gradient(40deg,#5fc0eb,#73a2f2,#eaadc5)', title: '好友推荐', text: '2994万人听过' },
+        { name: '民谣', back: 'background:linear-gradient(40deg,#2891d8,#43dcc0,#56f59a)', title: '好友推荐', text: '294万人听过' },
+        { name: '蓝调音乐', back: 'background:linear-gradient(40deg,#ab3bcb,#4b9fe6,#37ded2)', title: '我的喜好', text: '299万人听过' },
+        { name: '电子音乐', back: 'background:linear-gradient(40deg,#65109f,#c35398,#ecb7a0)', title: '官方推荐', text: '2094万人听过' },
+        { name: '古风音乐', back: 'background:linear-gradient(40deg,#ff8043,#f0dd64,#c1f177)', title: '我的喜好', text: '94万人听过' }
+      ]
     }
   },
   components: {}
@@ -126,29 +142,70 @@ export default {
             justify-content: space-between;
             align-items: center;
             padding: 0 5%;
+
             h2 {
               font-size: 40px;
             }
+
             .lx {
               color: #ec2195;
               font-size: 13px;
               display: flex;
               justify-content: center;
               align-items: center;
+
               .van-icon {
                 transform: rotate(180deg);
               }
             }
           }
-          .swiper-container{
+
+          .swiper-container {
             width: 100%;
             margin-top: 30px;
           }
-          .swiper-slide{
-            background: linear-gradient(40deg,#4b67f6,#1ab8ee,#22dfd4);
+
+          .swiper-wrapper {
+            padding-top: 20px;
+            padding-left: 30px;
+            padding-bottom: 30px;
+          }
+
+          .swiper-slide {
             height: 300px;
-            border-radius: 6%;
-            box-shadow: 0px 6px 10px rgba(18, 108, 109, 0.76);
+            border-radius: 8px;
+            box-shadow: 4px 0px 10px rgba(35, 77, 111, 0.2);
+            h3{
+              color: #ffffff;
+              font-size: 34px;
+              margin-top: 30px;
+            }
+            .text{
+              position: absolute;
+              bottom: 0;
+              p{
+                text-align: left;
+                margin-left: 40px;
+                font-size: 14px;
+                color: #fdfdfd;
+                text-shadow: 0px 0px 3px #270715;
+                &:last-child{
+                  margin-bottom: 20px;
+                }
+              }
+            }
+            .before{
+              content: '';
+              position: absolute;
+              width: 83%;
+              height: 100%;
+              z-index: -1;
+              bottom: -10px;
+              left: 0;
+              filter: blur(10px);
+              right: 0;
+              margin: auto;
+            }
           }
         }
 

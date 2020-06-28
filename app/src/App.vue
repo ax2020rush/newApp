@@ -98,4 +98,20 @@ body{
 .turn-off-leave-active {
   z-index: 9999;
 }
+body,html{
+  width: 100%;
+  height: 100%;
+}
+#app{
+  width: 500PX;
+  height: 100%;
+  margin: 0 auto;
+  overflow: hidden;
+
+}
+@media (max-width: 500px) {
+  #app{
+    width: 100%;
+  }
+}
 </style>

@@ -1,15 +1,27 @@
 const path = require('path')
+function resolve(dir){
+  return path.join(__dirname,dir)//path.join(__dirname)设置绝对路径
+}
 const CompressionWebpackPlugin = require('compression-webpack-plugin')
 const productionGzipExtensions = /\.(js|css|json|txt|html|ico|svg)(\?.*)?$/i // 需要开启gz压缩的格式;
 // eslint-disable-next-line camelcase
 const Is_Pord = ['production', 'test'].includes(process.env.VUE_APP_SERVER_EVN) // 这里的Is_Pord指的是生产环境和测试环境(这里统称Is_Pord)
-
 module.exports = {
+
   outputDir: 'dist',
-  assetsDir: 'src',
   // lintOnSave: false,
+  chainWebpack: (config) => {
+  },
+  chainWebpack:(config)=>{
+    config.resolve.alias
+      .set('@',resolve('./src'))
+      .set('components',resolve('./src/components'))
+      .set('assets',resolve('./src/assets'))
+    //set第一个参数：设置的别名，第二个参数：设置的路径
+  },
   runtimeCompiler: true,
   productionSourceMap: false,
+
   css: {
     loaderOptions: {
       css: {},

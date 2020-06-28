@@ -7,7 +7,7 @@ const Is_Pord = ['production', 'test'].includes(process.env.VUE_APP_SERVER_EVN) 
 module.exports = {
   outputDir: 'dist',
   assetsDir: 'src',
-  lintOnSave: false,
+  // lintOnSave: false,
   runtimeCompiler: true,
   productionSourceMap: false,
   css: {
